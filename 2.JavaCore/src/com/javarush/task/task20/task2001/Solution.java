@@ -71,16 +71,32 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
-            PrintWriter printWriter = new PrintWriter(outputStream);
-            printWriter.print(name);
-            printWriter.print(assets);
+            PrintWriter writer = new PrintWriter(outputStream);
+            String isNamePresent = (this.name != null) ? "yes" : "no";
+            writer.println(isNamePresent);
+            if ("yes".equals(isNamePresent)) {
+                writer.println(this.name);
+                if (this.assets.size() > 0) {
+                    for (Asset a : this.assets) {
+                        writer.println(a.getName());
+                    }
+                }
+            }
+            writer.close();
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            name = reader.readLine();
-            //assets = reader.readLine();
+            String isNamePresent = reader.readLine();
+            if ("yes".equals(isNamePresent)) {
+                this.name = reader.readLine();
+                String assetName;
+                while ((assetName = reader.readLine()) != null) {
+                    this.assets.add(new Asset(assetName));
+                }
+            }
+            reader.close();
         }
     }
 }
