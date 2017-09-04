@@ -42,6 +42,14 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            PrintWriter writer = new PrintWriter(outputStream);
+            String isUsersPresent = users!=null ? "yae" : "no";
+            writer.print(isUsersPresent);
+            if(users!=null){
+                for (User u : users){
+                    writer.print(u);
+                }
+            }
         }
 
         public void load(InputStream inputStream) throws Exception {
