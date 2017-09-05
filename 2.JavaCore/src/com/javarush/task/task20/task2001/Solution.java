@@ -47,12 +47,10 @@ public class Solution {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-
             Human human = (Human) o;
 
             if (name != null ? !name.equals(human.name) : human.name != null) return false;
             return assets != null ? assets.equals(human.assets) : human.assets == null;
-
         }
 
         @Override
