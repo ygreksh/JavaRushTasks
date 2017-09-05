@@ -1,6 +1,7 @@
 package com.javarush.task.task20.task2002;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,18 +43,33 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
-            PrintWriter writer = new PrintWriter(outputStream);
-            String isUsersPresent = users!=null ? "yae" : "no";
-            writer.print(isUsersPresent);
-            if(users!=null){
-                for (User u : users){
-                    writer.print(u);
-                }
-            }
+
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+            while (reader.ready())
+            {
+                String newUser = reader.readLine();
+                if (newUser.equals("yes"))
+                {
+                    User u = new User();
+                    String name = reader.readLine();
+                    if (name.equals("noFirstName")) name = null;
+                    u.setFirstName(name);
+                    String lastName = reader.readLine();
+                    if (lastName.equals("noLastName")) lastName = null;
+                    u.setLastName(lastName);
+                    u.setBirthDate(format.parse(reader.readLine()));
+                    if (reader.readLine().equals("true"))
+                        u.setMale(true);
+                    else u.setMale(false);
+                    u.setCountry(User.Country.valueOf(reader.readLine()));
+                    users.add(u);
+                }
+            }
         }
 
         @Override
