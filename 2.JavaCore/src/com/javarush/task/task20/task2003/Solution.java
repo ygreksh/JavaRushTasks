@@ -1,8 +1,8 @@
 package com.javarush.task.task20.task2003;
 
+
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /* 
 Знакомство с properties
@@ -22,24 +22,24 @@ public class Solution {
 
     public void save(OutputStream outputStream) throws Exception {
         //implement this method - реализуйте этот метод
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+        Properties prop = new Properties();
         //
         for (Map.Entry<String,String> entry : properties.entrySet()){
-            bw.write(entry.getKey()+"="+entry.getValue());
+            prop.setProperty(entry.getKey(), entry.getValue());
         }
-        bw.close();
+        prop.store(outputStream,null);
+        //bw.close();
     }
 
     public void load(InputStream inputStream) throws Exception {
         //implement this method - реализуйте этот метод
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-        //
-        String line;
-        while ((line=br.readLine())!=null){
-            String[] words = line.split("=");
-            properties.put(words[0],words[1]);
+        Properties prop = new Properties();
+        prop.load(inputStream);
+        Set<String> set;
+        set = prop.stringPropertyNames();
+        for (String s : set){
+            properties.put(s, prop.getProperty(s));
         }
-        br.close();
     }
 
     public static void main(String[] args) {
