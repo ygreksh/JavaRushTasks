@@ -22,11 +22,24 @@ public class Solution {
 
     public void save(OutputStream outputStream) throws Exception {
         //implement this method - реализуйте этот метод
-
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+        //
+        for (Map.Entry<String,String> entry : properties.entrySet()){
+            bw.write(entry.getKey()+"="+entry.getValue());
+        }
+        bw.close();
     }
 
     public void load(InputStream inputStream) throws Exception {
         //implement this method - реализуйте этот метод
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+        //
+        String line;
+        while ((line=br.readLine())!=null){
+            String[] words = line.split("=");
+            properties.put(words[0],words[1]);
+        }
+        br.close();
     }
 
     public static void main(String[] args) {
