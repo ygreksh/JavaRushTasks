@@ -23,11 +23,13 @@ public class Solution {
        private void writeObject(ObjectOutputStream objectOutputStream) throws IOException {
             //
            objectOutputStream.writeObject(name);
+           objectOutputStream.defaultWriteObject();
        }
 
         private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
             //
             name = (String) objectInputStream.readObject();
+            objectInputStream.defaultReadObject();
         }
     }
 
