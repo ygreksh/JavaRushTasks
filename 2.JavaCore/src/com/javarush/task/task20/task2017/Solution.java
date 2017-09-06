@@ -1,16 +1,24 @@
 package com.javarush.task.task20.task2017;
 
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 
 /* 
 Десериализация
 */
 public class Solution {
     public A getOriginalObject(ObjectInputStream objectStream) {
-        return null;
+
+        try {
+            A a = (A) objectStream.readObject();
+            return a;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public class A {
+    public class A implements Serializable{
     }
 
     public class B extends A {
