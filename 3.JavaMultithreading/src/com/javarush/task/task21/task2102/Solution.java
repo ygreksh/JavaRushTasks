@@ -17,7 +17,9 @@ public class Solution {
     }
 
     public static boolean isAllModifiersContainSpecificModifier(int allModifiers, int specificModifier) {
-        return false;
+        if ((Modifier.isPublic(allModifiers) && Modifier.isPublic(specificModifier) && (Modifier.isStatic(allModifiers) && Modifier.isStatic(specificModifier))))
+            return true;
+            else return allModifiers==specificModifier;
     }
 
     private static Method getMainMethod() {
