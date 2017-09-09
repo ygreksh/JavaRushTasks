@@ -32,6 +32,7 @@ public class Solution {
     }
 
     public synchronized String getPartOfString(String string, String threadName) {
+
         return null;
     }
 }
