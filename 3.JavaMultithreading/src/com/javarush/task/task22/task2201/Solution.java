@@ -32,7 +32,29 @@ public class Solution {
     }
 
     public synchronized String getPartOfString(String string, String threadName) {
+        int counttabs = 0;
+        for (char element : string.toCharArray()){
+            if (element=='\t') counttabs++;
+        }
 
-        return null;
+        if (counttabs<2) {
+            if (threadName.equals(FIRST_THREAD_NAME)) {
+                throw new TooShortStringFirstThreadException();
+            }
+            else if (threadName.equals(SECOND_THREAD_NAME)) {
+                throw new TooShortStringSecondThreadException();
+            }
+            else throw new RuntimeException();
+        }
+        String substr;
+        int IndexOfFirstTab;
+        int IndexOfLastTab;
+        IndexOfFirstTab = string.indexOf("\t");
+        IndexOfLastTab = string.lastIndexOf("\t");
+        //int i=0;
+        //int count=0;
+        substr = string.substring(IndexOfFirstTab+1,IndexOfLastTab);
+
+        return substr;
     }
 }
