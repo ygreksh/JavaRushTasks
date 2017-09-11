@@ -11,9 +11,12 @@ public class Solution {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String filename = reader.readLine();
         reader.close();
-        BufferedReader fr = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
-        String fullfile = fr.readLine();
-        System.out.println("Содержимое файла:\n" + fullfile);
+        //BufferedReader fr = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
+        ByteArrayInputStream filereader = new ByteArrayInputStream(new FileInputSt);
+        byte[] bytes = new byte[filereader.available()];
+        filereader.read(bytes);
+        String fullfile = String.valueOf(bytes);
+        //System.out.println("Содержимое файла:\n" + fullfile);
         String[] words = fullfile.split(" ");
         StringBuilder result = getLine(words);
         System.out.println(result.toString());
@@ -32,7 +35,7 @@ public class Solution {
             if (newwordlist.isEmpty()){
                 newwordlist.add(word);
                 endchar = word.toLowerCase().charAt(word.length() - 1);
-                System.out.println("Первое слово: " + word +". end is " + Character.toString(endchar));
+                //System.out.println("Первое слово: " + word +". end is " + Character.toString(endchar));
                 continue;
             }
 
@@ -41,7 +44,7 @@ public class Solution {
                 if (!newwordlist.contains(w) && startchar == endchar) {
                     newwordlist.add(w);
                     endchar = w.toLowerCase().charAt(w.length() - 1);
-                    System.out.println("Следующее слово: " + w + ". end is " + Character.toString(endchar));
+                    //System.out.println("Следующее слово: " + w + ". end is " + Character.toString(endchar));
                 }
             }
         }
