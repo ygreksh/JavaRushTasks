@@ -10,6 +10,18 @@ public class Solution {
 
     }
     public static String getQuery(Map<String, String> params) {
-        return null;
+        StringBuilder sbout = new StringBuilder();
+        String sout;
+        int i=0;
+        for (Map.Entry<String,String> entry : params.entrySet()){
+            //i++;
+            if (entry.getValue()!=null){
+                i++;
+                if (i>1) sbout.append(" and ");
+                sbout.append(entry.getKey()).append(" = \'").append(entry.getValue()).append("\'");
+            }
+        }
+        sout = sbout.toString();
+        return sout;
     }
 }
