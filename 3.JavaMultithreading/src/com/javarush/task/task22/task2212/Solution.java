@@ -10,43 +10,38 @@ import java.util.regex.Pattern;
 */
 public class Solution {
     public static boolean checkTelNumber(String telNumber) {
-
         /*
-        //1) если номер начинается с ‘+‘, то он содержит 12 цифр
-        Pattern p1 = Pattern.compile("^\\+[0-9]{12}");
-        Matcher m1 = p1.matcher(telNumber);
-
-        //2) если номер начинается с цифры или открывающей скобки, то он содержит 10 цифр
-        Pattern p2 = Pattern.compile("\\(?\\d{10}");
-        Matcher m2 = p2.matcher(telNumber);
-
-        //3) может содержать 0-2 знаков ‘—‘, которые не могут идти подряд
-        Pattern p3 = Pattern.compile(".+-*.+-*.+");
-        Matcher m3 = p3.matcher(telNumber);
-
-        //4) может содержать 1 пару скобок ‘(‘ и ‘)‘ , причем если она есть, то она расположена левее знаков ‘-‘
-        Pattern p4 = Pattern.compile(".*\\(.+\\).*-.*");
-        Matcher m4 = p4.matcher(telNumber);
-
-        //5) скобки внутри содержат четко 3 цифры
-        Pattern p5 = Pattern.compile(".*\\(\\d{3}\\).*");
-        Matcher m5 = p5.matcher(telNumber);
-
-        //6) номер не содержит букв
-        Pattern p6 = Pattern.compile("[\\w\\+\\-\\(\\)]+");
-        Matcher m6 = p6.matcher(telNumber);
-
-        //7) номер заканчивается на цифру
-        Pattern p7 = Pattern.compile(".*\\d$");
-        Matcher m7 = p7.matcher(telNumber);
-        */
         boolean result = false;
         if(telNumber!=null && telNumber!="") {
-            if (telNumber.matches("\\+[\\d()-]{12}") && telNumber.matches("\\(?[\\d()-]{10}")
-                    && telNumber.matches(".+-*.+-*.+") && telNumber.matches("[^-]*\\(?[^-]+\\)?.*-.*")
-                    && telNumber.matches(".*\\(\\d{3}\\).*") && telNumber.matches("[\\w\\+\\-\\(\\)]+")
+            if (telNumber.matches("^\\+\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d")
+                    && telNumber.matches("\\(?\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d\\D*\\d")
+                    && telNumber.matches(".+-?.+-?.+")
+                    && telNumber.matches("[^-]*\\(?[^-]+\\)?.*-.*")
+                    && telNumber.matches(".*\\(?\\d{3}\\)?.*")
+                    && telNumber.matches("[\\w\\+\\-()]+")
                     && telNumber.matches(".*\\d")) result = true;
             else result = false;
+        }
+        return result;
+        */
+        boolean result = false;
+        if (telNumber == null) return false;
+        if (!telNumber.matches("[\\d, \\+, \\(, \\), -]+[\\d]$")) return false;
+        if (telNumber.matches("^\\+.*")) {
+            String digits = telNumber.replaceAll("\\D", "");
+            if (digits.length() != 12) {
+                return false;
+            }
+        }
+        else if (telNumber.matches("^(\\(|\\d).*")) {
+            String digits = telNumber.replaceAll("\\D", "");
+            if (digits.length() != 10) {
+                return false;
+            }
+        }
+        else if (!telNumber.matches("^\\-.*")) return false;
+        if (telNumber.matches("\\+?\\d*(\\(\\d{3}\\))?\\d+?-?\\d+-?\\d*")) {
+            result = true;
         }
         return result;
     }
