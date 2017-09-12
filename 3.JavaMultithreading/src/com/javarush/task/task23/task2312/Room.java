@@ -132,7 +132,8 @@ public class Room {
      * Программа делает паузу, длинна которой зависит от длинны змеи.
      */
     public void sleep() throws InterruptedException {
-        int delay = 500-(game.snake.getSections().size()-1)*20;
-        Thread.sleep(delay);
+        int level = snake.getSections().size()-1;
+        if (level<15)Thread.sleep(500-(level)*20);
+        else Thread.sleep(200);
     }
 }
