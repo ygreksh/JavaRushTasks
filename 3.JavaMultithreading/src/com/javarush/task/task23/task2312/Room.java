@@ -99,17 +99,18 @@ public class Room {
         //Рисуем мышь
         //Выводим все это на экран
         int[][] screen = new int[width][height];
-        String[] symbols = {".","x","X","^"};
+        String[] symbols = {".","X","x","^"};
         for (int j=0;j<height;j++) {
             for (int i = 0; i < width; i++) {
                 screen[i][j]=0;
             }
         }
-        screen[mouse.getX()][mouse.getY()]=3;//мышь
-        screen[snake.getX()][snake.getY()]=1;//голова змеи
         for (SnakeSection snakeSection : snake.getSections()){
             screen[snakeSection.getX()][snakeSection.getY()]=2;//тело змеи
         }
+        screen[mouse.getX()][mouse.getY()]=3;//мышь
+        screen[snake.getX()][snake.getY()]=1;//голова змеи
+
         for (int j=0;j<height;j++) {
             for (int i = 0; i < width; i++) {
                 System.out.print(symbols[screen[i][j]]);
