@@ -1,4 +1,5 @@
 package com.javarush.task.task23.task2312;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -65,3 +66,4 @@ public class KeyboardObserver extends Thread {
         return keyEvents.poll();
     }
 }
+
