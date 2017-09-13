@@ -35,4 +35,10 @@ public class SnakeSection {
     public int getY() {
         return y;
     }
+
+    public void checkBorders(SnakeSection head){
+        if (head.x<0 || head.y>Room.game.getWidth() || head.y<0 || head.y>Room.game.getHeight()) {
+            //Room.game.getSnake().isAlive=false;
+        }
+    }
 }
