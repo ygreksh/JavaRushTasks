@@ -56,9 +56,21 @@ public class Arkanoid {
     public void setHeight(int height) {
         this.height = height;
     }
-    public void run(){}
-    public void move(){}
 
+    public void run(){}
+
+    public void move(){
+        stand.move();
+        ball.move();
+    }
+
+    public void draw(Canvas canvas){
+        stand.draw(canvas);
+        ball.draw(canvas);
+        for (Brick brick : bricks){
+            brick.draw(canvas);
+        }
+    }
 
     public static void main(String[] args){
 
