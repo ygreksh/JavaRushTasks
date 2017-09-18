@@ -11,17 +11,20 @@ public class Solution {
     public static void main(String[] args) {
         Model model = new MainModel();
         UsersView usersView = new UsersView();
-        EditUserView editUserView = new EditUserView();
         Controller controller = new Controller();
+        EditUserView editUserView = new EditUserView();
 
         usersView.setController(controller);
+        editUserView.setController(controller);
         controller.setModel(model);
         controller.setUsersView(usersView);
+        controller.setEditUserView(editUserView);
+
 
         usersView.fireEventShowAllUsers();
-        controller.setEditUserView(editUserView);
-        usersView.fireEventOpenUserEditForm(126);
+        usersView.fireEventOpenUserEditForm(126L);
         editUserView.fireEventUserDeleted(124L);
+        //editUserView.fireEventUserChanged("Уася",125L, 66);
         usersView.fireEventShowDeletedUsers();
     }
 }
