@@ -51,10 +51,7 @@ public class Util {
                 return price;
             }
 
-            @Override
-            public String getTM() {
-                return null;
-            }
+
 
             @Override
             public String toString() {
@@ -63,33 +60,30 @@ public class Util {
         }
 
         class Levis extends AbstractJeans{
-            public Levis() {
-            }
-
-            @Override
-            public int getLength() {
-                return 0;
-            }
-
-            @Override
-            public int getSize() {
-                return 0;
-            }
-
-            @Override
-            public int getId() {
-                return 0;
-            }
-
-            @Override
-            public double getPrice() {
-                return 0;
+            String TM;
+            public Levis(int id, int length, int size, double price) {
+                super(id, length, size, price);
             }
 
             @Override
             public String getTM() {
-                return null;
+                return TM;
             }
+        }
+        class Denim extends AbstractJeans {
+            String TM;
+
+            Denim(int id, int length, int size, double price)
+            {
+                super(id, length, size, price);
+            }
+
+            @Override
+            public String getTM()
+            {
+                return TM;
+            }
+
         }
 
         List<Jeans> allJeans = new LinkedList<>();
