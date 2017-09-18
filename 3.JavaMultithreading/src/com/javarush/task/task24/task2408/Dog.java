@@ -1,5 +1,8 @@
 package com.javarush.task.task24.task2408;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /*
 В работе вам иногда будет нужно закастить класс к какому-нибудь другому классу, не интерфейсу :)))
 Класс DogPet использует 2 класса - SuperDog и Dog, разберись с getName в классе DogPet
@@ -42,6 +45,36 @@ public class Dog implements Pet {
      * @return экземпляр класса DogPet
      */
     public Sayable toSayable(final int i) {
-       return null;
+        class DogPet extends SuperDog implements Sayable{
+
+            @Override
+            public String say() {
+                /*if (i<1) return getName()+ " спит.";
+                else {
+                    String a = "а";
+                    String gav = "г";
+                    for (int k=0;k<i;k++){
+                        gav+=a;
+                    }
+                    gav+="в";
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy E");
+                    //Date cutrentDate = new Date();
+                    return getName()+ " лает " + gav + "! " + sdf.format(new Date());}
+                    */
+
+                if (i <= 0)
+                    return this.getName() + " спит.";
+                else {
+                    StringBuilder stringBuilder = new StringBuilder(getName()+" лает г");
+                    for (int j = 0; j < i; j++)
+                        stringBuilder.append("а");
+                    return stringBuilder.append("в! ").append(formatter.format(new Date())).toString();
+                }
+            }
+            private String getName(){
+                return getSuperQuotes()+name+getSuperQuotes();
+            }
+        }
+       return new DogPet();
     }
 }
