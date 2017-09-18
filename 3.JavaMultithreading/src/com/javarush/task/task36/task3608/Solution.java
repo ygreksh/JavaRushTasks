@@ -24,7 +24,7 @@ public class Solution {
         usersView.fireEventShowAllUsers();
         usersView.fireEventOpenUserEditForm(126L);
         editUserView.fireEventUserDeleted(124L);
-        //editUserView.fireEventUserChanged("Уася",125L, 66);
+        editUserView.fireEventUserChanged("User13",125L,13);
         usersView.fireEventShowDeletedUsers();
     }
 }
