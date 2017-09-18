@@ -29,4 +29,10 @@ public class MainModel implements Model{
         User user = userService.getUsersById(userId);
         modelData.setActiveUser(user);
     }
+
+    @Override
+    public void deleteUserById(long id) {
+        User user = userService.deleteUser(id);
+        modelData.setDeletedUser(user);
+    }
 }

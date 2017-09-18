@@ -7,6 +7,12 @@ import java.util.List;
 public class ModelData {
     private List<User> users;
     private User activeUser;
+    private User deletedUser;
+
+    public void setDeletedUser(User deletedUser) {
+        this.deletedUser = deletedUser;
+    }
+
     private boolean displayDeletedUserList;
 
     public boolean isDisplayDeletedUserList() {

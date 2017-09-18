@@ -31,6 +31,9 @@ public class Controller {
     public void setUsersView(UsersView usersView) {
         this.usersView = usersView;
     }
+    public void onUserDelete(long id){
+        model.deleteUserById(id);
+    }
 
 
 }
