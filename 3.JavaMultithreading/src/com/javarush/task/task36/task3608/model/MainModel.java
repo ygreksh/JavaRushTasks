@@ -10,6 +10,7 @@ public class MainModel implements Model{
     private ModelData modelData = new ModelData();
     private UserService userService = new UserServiceImpl();
 
+
     @Override
     public ModelData getModelData() {
         return modelData;
@@ -23,5 +24,9 @@ public class MainModel implements Model{
     public void loadDeletedUsers(){
         modelData.setUsers(userService.getAllDeletedUsers());
         modelData.setDisplayDeletedUserList(true);
+    }
+    public void loadUserById(long userId) {
+        User user = userService.getUsersById(userId);
+        modelData.setActiveUser(user);
     }
 }
