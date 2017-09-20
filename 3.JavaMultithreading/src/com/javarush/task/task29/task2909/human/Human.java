@@ -25,8 +25,6 @@ public class Human {
 
     protected int[] size;
 
-    protected boolean isSoldier;
-
     public static final int FIRST = 1;
     public static final int SECOND = 2;
     public static final int THIRD = 3;
@@ -41,39 +39,26 @@ public class Human {
         return bloodGroup;
     }
 
-    public Human(boolean isSoldier) {
-        this.isSoldier = isSoldier;
+    public Human(String name, int age) {
         this.id = nextId;
         nextId++;
+        this.name = name;
+        this.age = age;
     }
 
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getCourse() {
         return course;
     }
 
-    public void live() {
-        if (isSoldier)
-            fight();
-    }
-
-    public void fight() {
-    }
+    public void live(){}
 
     public int getId() {
         return id;
