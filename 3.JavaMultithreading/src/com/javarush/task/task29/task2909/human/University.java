@@ -37,10 +37,21 @@ public class University {
         this.students = students;
     }
 
-    public Student getStudentWithAverageGrade() {
+    public Student getStudentWithAverageGrade(double avrgrade) {
         //TODO:
-        double maxavrgrade=0;
-        Student maxavrStudent=null;
+        for (Student student : students){
+
+            if (student.getAverageGrade()==avrgrade) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public Student getStudentWithMaxAverageGrade() {
+        //TODO:
+        double maxavrgrade=students.get(0).getAverageGrade();
+        Student maxavrStudent=students.get(0);
         for (Student student : students){
 
             if (student.getAverageGrade()>maxavrgrade) {
@@ -50,13 +61,26 @@ public class University {
         }
         return maxavrStudent;
     }
-
-    public Student getStudentWithMaxAverageGrade(double averageGrade) {
-        //TODO:
-        return null;
-    }
-
+/*
     public void getStudentWithMinAverageGradeAndExpel() {
         //TODO:
+        expel(getStudentWithMinAverageGrade());
+    }
+*/
+    public Student getStudentWithMinAverageGrade(){
+        double minavrgrade=students.get(0).getAverageGrade();
+        Student minavrStudent=students.get(0);
+        for (Student student : students){
+
+            if (student.getAverageGrade()<minavrgrade) {
+                minavrgrade = student.getAverageGrade();
+                minavrStudent = student;
+            }
+        }
+        return minavrStudent;
+    }
+    public void expel(Student student){
+        //student = getStudentWithMinAverageGrade();
+        students.remove(student);
     }
 }
