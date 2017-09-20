@@ -12,15 +12,11 @@ public class Teacher extends UniversityPerson {
         this.age = age;
         this.numberOfStudents = numberOfStudents;
     }
-
+    public String getPosition(){return "Преподаватель";}
     public void live() {
         teach();
     }
 
     public void teach() {
-    }
-
-    public void printData() {
-        System.out.println("Преподаватель: " + name);
     }
 }
