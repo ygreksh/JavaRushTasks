@@ -29,7 +29,8 @@ public class Student extends UniversityPerson {
     }
 
     public void incAverageGrade(double delta) {
-        averageGrade += delta;
+        double curravrGrade = getAverageGrade();
+        setAverageGrade(curravrGrade += delta);
     }
 
     public void setAverageGrade(double averageGrade) {
