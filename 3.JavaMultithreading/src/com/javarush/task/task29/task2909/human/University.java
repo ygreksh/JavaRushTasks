@@ -39,7 +39,16 @@ public class University {
 
     public Student getStudentWithAverageGrade() {
         //TODO:
-        return null;
+        double maxavrgrade=0;
+        Student maxavrStudent=null;
+        for (Student student : students){
+
+            if (student.getAverageGrade()>maxavrgrade) {
+                maxavrgrade = student.getAverageGrade();
+                maxavrStudent = student;
+            }
+        }
+        return maxavrStudent;
     }
 
     public Student getStudentWithMaxAverageGrade(double averageGrade) {
