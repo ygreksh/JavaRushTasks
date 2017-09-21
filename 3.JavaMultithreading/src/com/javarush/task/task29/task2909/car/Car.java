@@ -2,10 +2,16 @@ package com.javarush.task.task29.task2909.car;
 
 import java.util.Date;
 
-public class Car {
+public abstract class Car {
+    /*
     static public final int TRUCK = 0;
     static public final int SEDAN = 1;
     static public final int CABRIOLET = 2;
+*/
+    static public final int MAX_TRUCK_SPEED = 80;
+    static public final int MAX_SEDAN_SPEED = 120;
+    static public final int MAX_CABRIOLET_SPEED = 90;
+
 
     double fuel;
 
@@ -30,7 +36,10 @@ public class Car {
         else if (type==2)return new Cabriolet(numberOfPassengers);
         else return null;
     }
-
+    private boolean canPassengersBeTransferred(){
+        if (isDriverAvailable() && fuel>0) return true;
+        else return false;
+    }
     public void fill(double numberOfLiters) throws Exception {
         if (numberOfLiters < 0)
             throw new Exception();
@@ -62,11 +71,8 @@ public class Car {
 
 
     public int getNumberOfPassengersCanBeTransferred() {
-        if (!isDriverAvailable())
+        if (!canPassengersBeTransferred())
             return 0;
-        if (fuel <= 0)
-            return 0;
-
         return numberOfPassengers;
     }
 
@@ -79,12 +85,10 @@ public class Car {
     }
 
     public void startMoving() {
-        if (numberOfPassengers > 0) {
+        if (numberOfPassengers > 0)
             fastenPassengersBelts();
-            fastenDriverBelt();
-        } else {
-            fastenDriverBelt();
-        }
+        fastenDriverBelt();
+
     }
 
     public void fastenPassengersBelts() {
@@ -93,12 +97,6 @@ public class Car {
     public void fastenDriverBelt() {
     }
 
-    public int getMaxSpeed() {
-        if (type == TRUCK)
-            return 80;
-        if (type == SEDAN)
-            return 120;
-        return 90;
-    }
+    public abstract int getMaxSpeed();
 
 }
