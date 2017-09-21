@@ -38,7 +38,7 @@ public class Human implements Alive{
         this.id = nextId;
         nextId++;
     }
-
+    public String getPosition(){return "Человек";}
     public int getAge() {
         return age;
     }
@@ -66,6 +66,10 @@ public class Human implements Alive{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void printData() {
+        System.out.println(getPosition()+": " + name);
     }
 
     public void printSize() {
