@@ -61,21 +61,34 @@ public class Server {
             try {
                 connection = new Connection(socket);
                 newUser = serverHandshake(connection);
-                //sendListOfUsers(connection,newUser);
                 sendBroadcastMessage(new Message(MessageType.USER_ADDED, newUser));
+                sendListOfUsers(connection,newUser);
                 serverMainLoop(connection,newUser);
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                System.out.println("Произошла ошибка при обмене данными с удаленным адресом");
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                System.out.println("Произошла ошибка при обмене данными с удаленным адресом");
             } finally {
-                try {
-                    socket.close();
-                    sendBroadcastMessage(new Message(MessageType.USER_REMOVED,newUser));
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (newUser!=null) {
+                    connectionMap.remove(newUser);
+                    try {
+                        sendBroadcastMessage(new Message(MessageType.USER_REMOVED, newUser));
+                    } catch (IOException e) {
+                        //e.printStackTrace();
+                        System.out.println("Произошла ошибка при обмене данными с удаленным адресом");
+                    }
+                    try {
+                        socket.close();
+                    } catch (IOException e) {
+                        //e.printStackTrace();
+                        System.out.println("Произошла ошибка при закрытии соединения");
+                    }
                 }
+
             }
+            System.out.println("Соединение с удаленным адресом закрыто");
 
         }
     }
