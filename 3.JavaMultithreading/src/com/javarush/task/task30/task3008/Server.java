@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
+
+    private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
     private static class Handler extends Thread{
         public Socket socket;
 
@@ -49,8 +51,34 @@ public class Server {
                 }else System.out.println("Сообщение не является текстом");
             }
         }
+
+        @Override
+        public void run() {
+            //super.run();
+            System.out.println("Установлено соединение с " + socket.getRemoteSocketAddress());
+            Connection connection;
+            String newUser=null;
+            try {
+                connection = new Connection(socket);
+                newUser = serverHandshake(connection);
+                //sendListOfUsers(connection,newUser);
+                sendBroadcastMessage(new Message(MessageType.USER_ADDED, newUser));
+                serverMainLoop(connection,newUser);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    socket.close();
+                    sendBroadcastMessage(new Message(MessageType.USER_REMOVED,newUser));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
-    private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
     public static void sendBroadcastMessage(Message message) throws IOException {
         for (Map.Entry<String, Connection> entry : connectionMap.entrySet()){
