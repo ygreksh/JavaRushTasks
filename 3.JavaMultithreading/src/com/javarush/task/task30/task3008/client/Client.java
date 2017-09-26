@@ -16,7 +16,7 @@ public class Client {
     protected String getServerAddress() throws IOException {
         System.out.println("Введите адрес сервера:");
         String line = ConsoleHelper.readString();
-        return null;
+        return line;
     }
     protected int getServerPort() throws IOException {
         System.out.println("Введите номер порта сервера:");
