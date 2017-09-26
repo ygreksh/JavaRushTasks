@@ -31,6 +31,14 @@ public class Server {
                 }
             }
         }
+        private void sendListOfUsers(Connection connection, String userName) throws IOException{
+            for (Map.Entry<String, Connection> entry : connectionMap.entrySet()){
+                String username = entry.getKey();
+                if (!username.equals(userName)) {
+                    connection.send(new Message(MessageType.USER_ADDED, username));
+                }
+            }
+        }
     }
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
