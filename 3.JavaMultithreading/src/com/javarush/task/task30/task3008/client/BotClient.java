@@ -21,62 +21,44 @@ public class BotClient extends Client {
         @Override
         protected void processIncomingMessage(String message) {
             ConsoleHelper.writeMessage(message);
-            if (message.contains(": ")){
-                String[] params = message.split(": ");
-                String username = params[0];
-                String text = params[1];
-                String textdate = null;
-                Date currentDate = new Date();
-                SimpleDateFormat sdf;
-            /*
-            if (text.equals("дата")){
-                SimpleDateFormat sdf = new SimpleDateFormat("d.MM.YYYY");
-                Date currentDate = new Date());
-                String tarxdate = sdf.format(currentDate);
-            }*/
-                switch (text) {
+            if (message.contains(":")) {
+                String senderName = message.substring(0, message.indexOf(":"));
+                String textMessage = message.substring(message.indexOf(":") + 2);
+                switch (textMessage) {
                     case "дата":
-                        sdf = new SimpleDateFormat("d.MM.YYYY");
-                        textdate = sdf.format(currentDate);
+                        sendTextMessage(String.format("Информация для %s: %s", senderName,
+                                new SimpleDateFormat("d.MM.YYYY").format(Calendar.getInstance().getTime())));
                         break;
                     case "день":
-                        sdf = new SimpleDateFormat("d");
-                        textdate = sdf.format(currentDate);
+                        sendTextMessage(String.format("Информация для %s: %s", senderName,
+                                new SimpleDateFormat("d").format(Calendar.getInstance().getTime())));
                         break;
                     case "месяц":
-                        sdf = new SimpleDateFormat("MMMM");
-                        textdate = sdf.format(currentDate);
+                        sendTextMessage(String.format("Информация для %s: %s", senderName,
+                                new SimpleDateFormat("MMMM").format(Calendar.getInstance().getTime())));
                         break;
                     case "год":
-                        sdf = new SimpleDateFormat("YYYY");
-                        textdate = sdf.format(currentDate);
+                        sendTextMessage(String.format("Информация для %s: %s", senderName,
+                                new SimpleDateFormat("YYYY").format(Calendar.getInstance().getTime())));
                         break;
                     case "время":
-                        sdf = new SimpleDateFormat("H:mm:ss");
-                        textdate = sdf.format(currentDate);
+                        sendTextMessage(String.format("Информация для %s: %s", senderName,
+                                new SimpleDateFormat("H:mm:ss").format(Calendar.getInstance().getTime())));
                         break;
                     case "час":
-                        sdf = new SimpleDateFormat("H");
-                        textdate = sdf.format(currentDate);
+                        sendTextMessage(String.format("Информация для %s: %s", senderName,
+                                new SimpleDateFormat("H").format(Calendar.getInstance().getTime())));
                         break;
                     case "минуты":
-                        sdf = new SimpleDateFormat("m");
-                        textdate = sdf.format(currentDate);
+                        sendTextMessage(String.format("Информация для %s: %s", senderName,
+                                new SimpleDateFormat("m").format(Calendar.getInstance().getTime())));
                         break;
                     case "секунды":
-                        sdf = new SimpleDateFormat("s");
-                        textdate = sdf.format(currentDate);
+                        sendTextMessage(String.format("Информация для %s: %s", senderName,
+                                new SimpleDateFormat("s").format(Calendar.getInstance().getTime())));
                         break;
-                    default: textdate = null;
-                }
-                //if ()
-                try {
-                    connection.send(new Message(MessageType.TEXT, "информация для " + username + ": " + textdate));
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
-
         }
     }
 
