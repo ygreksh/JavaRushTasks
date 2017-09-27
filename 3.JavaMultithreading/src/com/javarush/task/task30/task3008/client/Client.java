@@ -4,10 +4,7 @@ import com.javarush.task.task30.task3008.Connection;
 import com.javarush.task.task30.task3008.ConsoleHelper;
 import com.javarush.task.task30.task3008.Message;
 import com.javarush.task.task30.task3008.MessageType;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Client {
     protected Connection connection;
@@ -81,6 +78,21 @@ public class Client {
 
 
     public class SocketThread extends Thread{
+        protected void processIncomingMessage(String message){
+            ConsoleHelper.writeMessage(message);
+        }
+        protected void informAboutAddingNewUser(String userName){
+            ConsoleHelper.writeMessage(userName + " присоединился к чату.");
+        }
+        protected void informAboutDeletingNewUser(String userName){
+            ConsoleHelper.writeMessage(userName + " покинул чат.");
+        }
+        protected void notifyConnectionStatusChanged(boolean clientConnected){
+            Client.this.clientConnected = clientConnected;
+            synchronized (Client.this) {
+                Client.this.notify();
+            }
+        }
 
     }
 }
