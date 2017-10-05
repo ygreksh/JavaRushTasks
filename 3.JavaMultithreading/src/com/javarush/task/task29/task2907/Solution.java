@@ -15,7 +15,7 @@ public class Solution {
         b1 = BigDecimal.valueOf(v1);
         BigDecimal b2 = new BigDecimal(BigDecimal.valueOf(v2).doubleValue());
         b2 = BigDecimal.valueOf(v2);
-        b1  = b1.add(b2);
-        return b1;
+        //b1  = b1.add(b2);
+        return b1.add(b2);
     }
 }
