@@ -16,21 +16,34 @@ public class Solution {
     }
     private static Set<Integer> getRadix(String number){
         Set<Integer> set = new HashSet<>();
-        //Перевожу в числа разных систем исчисления и проверяю на палиндром
-
+        String chars = "ABCDEFGHIGKLMNOPQRSTUVWXYZ";
+        try {
+            int num = Integer.parseInt(number);
+            //int l = number.length();
+            //System.out.println("Строка: " + number + ". Число в 10-й системе: " + num);
             for (int i=2;i<=36;i++){
-                try {
-                    String num = String.valueOf(Integer.parseInt(number,i));
-                    StringBuilder sb = new StringBuilder(num);
-                    String mun = sb.reverse().toString();
-                    if (num.equals(mun)) {
-                        set.add(i);
-                        System.out.print(num + ". ");
+                StringBuilder res = new StringBuilder();
+                int n = num;
+                while (n>=i) {
+                    int ost = n%i;
+                    if (ost<10) {
+                        res.append(String.valueOf(ost));
+                    }else {
+                        res.append(chars.substring(ost-10,ost-9));
+                        //System.out.println("Добавили " + chars.substring(ost-10,ost-9));
                     }
-                } catch (NumberFormatException e) {
-                    //e.printStackTrace();
+                    n=n/i;
+                }
+                res.append(n);
+                if (res.toString().equals(res.reverse().toString())){
+                    set.add(i);
+                    //System.out.print(res.reverse() + ", ");
+                    //System.out.println(number + " Число в " + i + "-й системе: " + res.toString() + ". Реверс: " + res.reverse().toString());
                 }
             }
+        } catch (NumberFormatException e) {
+            //e.printStackTrace();
+        }
 
         return set;
     }
