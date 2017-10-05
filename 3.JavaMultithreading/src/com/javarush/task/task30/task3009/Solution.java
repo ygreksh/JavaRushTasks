@@ -16,7 +16,7 @@ public class Solution {
     }
     private static Set<Integer> getRadix(String number){
         Set<Integer> set = new HashSet<>();
-        String chars = "ABCDEFGHIGKLMNOPQRSTUVWXYZ";
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         try {
             int num = Integer.parseInt(number);
             //int l = number.length();
@@ -40,7 +40,7 @@ public class Solution {
                     res.append(chars.substring(n-10,n-9));
                     //System.out.println("Добавили " + chars.substring(n-10,n-9) + " вместо " + n);
                 }
-                //System.out.println(number + " Число в " + i + "-й системе: " + res.reverse().toString() + ". Реверс: " + res.toString());
+                System.out.println(number + " Число в " + i + "-й системе: " + res.toString() + ". Реверс: " + res.reverse().toString());
                 if (res.toString().equals(res.reverse().toString())){
                     set.add(i);
                     //System.out.println(number + " Число в " + i + "-й системе: " + res.reverse().toString() + ". Реверс: " + res.toString());
