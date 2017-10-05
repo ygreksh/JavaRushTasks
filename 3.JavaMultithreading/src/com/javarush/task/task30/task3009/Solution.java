@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Solution {
     public static void main(String[] args) {
-        System.out.println(getRadix("30"));        //expected output: [3, 27, 13, 15]
+        System.out.println(getRadix("112"));        //expected output: [3, 27, 13, 15]
         System.out.println(getRadix("123"));        //expected output: [6]
         System.out.println(getRadix("5321"));       //expected output: []
         System.out.println(getRadix("1A"));         //expected output: []
@@ -24,18 +24,23 @@ public class Solution {
             for (int i=2;i<=36;i++){
                 StringBuilder res = new StringBuilder();
                 int n = num;
-                while (n>=i) {
+                while (n>i) {
                     int ost = n%i;
                     if (ost<10) {
                         res.append(String.valueOf(ost));
                     }else {
                         res.append(chars.substring(ost-10,ost-9));
-                        //System.out.println("Добавили " + chars.substring(ost-10,ost-9));
+                        //System.out.println("Добавили " + chars.substring(ost-10,ost-9) + " вместо " + ost);
                     }
                     n=n/i;
                 }
-                res.append(n);
-                System.out.println(number + " Число в " + i + "-й системе: " + res.reverse().toString() + ". Реверс: " + res.toString());
+                if (n<10) {
+                    res.append(String.valueOf(n));
+                }else {
+                    res.append(chars.substring(n-10,n-9));
+                    //System.out.println("Добавили " + chars.substring(n-10,n-9) + " вместо " + n);
+                }
+                //System.out.println(number + " Число в " + i + "-й системе: " + res.reverse().toString() + ". Реверс: " + res.toString());
                 if (res.toString().equals(res.reverse().toString())){
                     set.add(i);
                     //System.out.println(number + " Число в " + i + "-й системе: " + res.reverse().toString() + ". Реверс: " + res.toString());
