@@ -110,4 +110,14 @@ public class View extends JFrame implements ActionListener {
             return true;
         else return false;
     }
+    public void selectHtmlTab(){
+        tabbedPane.setSelectedIndex(0);
+        resetUndo();
+    }
+    public void update(){
+        htmlTextPane.setDocument(controller.getDocument());
+    }
+    public void showAbout(){
+        JOptionPane.showMessageDialog(getContentPane(), "Это прога","О программе" ,JOptionPane.INFORMATION_MESSAGE);
+    }
 }
