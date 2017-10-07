@@ -1,0 +1,156 @@
+Index: 3.JavaMultithreading/src/com/javarush/task/task32/task3209/View.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- 3.JavaMultithreading/src/com/javarush/task/task32/task3209/View.java	(date 1507400156000)
++++ 3.JavaMultithreading/src/com/javarush/task/task32/task3209/View.java	(revision )
+@@ -72,5 +72,10 @@
+         pack();
+     }
+     public void selectedTabChanged(){}
+-
++    public boolean canUndo(){
++        return false;
++    }
++    public boolean canRedo(){
++        return false;
++    }
+ }
+Index: 3.JavaMultithreading/src/com/javarush/task/task32/task3209/listeners/UndoMenuListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- 3.JavaMultithreading/src/com/javarush/task/task32/task3209/listeners/UndoMenuListener.java	(date 1507400156000)
++++ 3.JavaMultithreading/src/com/javarush/task/task32/task3209/listeners/UndoMenuListener.java	(revision )
+@@ -7,12 +7,20 @@
+ import javax.swing.event.MenuListener;
+ 
+ public class UndoMenuListener implements MenuListener {
++    private View view;
++    private JMenuItem undoMenuItem;
++    private JMenuItem redoMenuItem;
++
+     public UndoMenuListener(View view, JMenuItem undoMenuItem, JMenuItem redoMenuItem) {
++        this.view = view;
++        this.undoMenuItem = undoMenuItem;
++        this.redoMenuItem = redoMenuItem;
+     }
+ 
+     @Override
+     public void menuSelected(MenuEvent e) {
+-
++        undoMenuItem.setEnabled(view.canUndo());
++        redoMenuItem.setEnabled(view.canRedo());
+     }
+ 
+     @Override
+@@ -24,4 +32,5 @@
+     public void menuCanceled(MenuEvent e) {
+ 
+     }
++
+ }
+Index: JavaRushPlugin.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1251
+===================================================================
+--- JavaRushPlugin.properties	(date 1507400156000)
++++ JavaRushPlugin.properties	(revision )
+@@ -1,8 +1,8 @@
+-#Sat Oct 07 21:15:35 EEST 2017
++#Sat Oct 07 22:14:22 EEST 2017
+ javarush.query.filter=
+ javarush.quest.filter=QUEST_JAVA_MULTITHREADING
+ javarush.status.filter=ASSIGNED
+-javarush.last.task.key=com.javarush.task.task32.task3209.big09
++javarush.last.task.key=com.javarush.task.task32.task3209.big10
+ javarush.last.task.path=C\:/Users/ygrek/Documents/Java/JavaRushTasks/3.JavaMultithreading/src/com/javarush/task/task32/task3209
+ javarush.user.secretkey=d34f433b-738e-4f91-8083-d850590fb086
+ javarush.level.filter=EIGHT
+diff --git 3.JavaMultithreading/src/com/javarush/task/task32/task3209/Условие.jrtc 3.JavaMultithreading/src/com/javarush/task/task32/task3209/Условие.jrtc
+index 66a2b0a586e53f64397a4deadaf8dd786bd0537d..9ff243d54984ef4ba4abf6428260f5cc31125b79
+GIT binary patch
+literal 14327
+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
+LFx&K~1i1V^NRJUH
+
