@@ -43,7 +43,20 @@ public class View extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-
+        String commandName = actionEvent.getActionCommand();
+        if(commandName.equals("Новый")){
+            controller.createNewDocument();
+        }else if (commandName.equals("Открыть")){
+            controller.openDocument();
+        }else if (commandName.equals("Сохранить")){
+            controller.saveDocument();
+        }else if (commandName.equals("Сохранить как...")){
+            controller.saveDocumentAs();
+        }else if (commandName.equals("Выход")){
+            controller.exit();
+        }else if (commandName.equals("О программе")){
+            showAbout();
+        }
     }
     public void init(){
         initGui();
