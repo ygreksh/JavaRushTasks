@@ -23,12 +23,15 @@ public class Solution {
     public static Path downloadFile(String urlString, Path downloadDirectory) throws IOException {
         // implement this method
         String fileName = urlString.substring(urlString.lastIndexOf("/")+1);
-        Path downloadedFile = Paths.get(downloadDirectory + "\\" + fileName);
+        Path downloadedFile = Paths.get(downloadDirectory + "/" + fileName);
 
         URL url = new URL(urlString);
         InputStream inputStream = url.openStream();
-        //Path tempfile = Files.copy(downloadDirectory,".tmp");
-        //return tempfile;
-        return null;
+        Path tempfile = Files.createTempFile("temp-",".tmp");
+        Files.copy(inputStream,tempfile);
+        inputStream.close();
+        Files.move(tempfile,downloadedFile);
+        return downloadedFile;
+        //return null;
     }
 }
