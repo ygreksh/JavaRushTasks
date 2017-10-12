@@ -1,6 +1,7 @@
 package com.javarush.task.task31.task3112;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,5 +22,13 @@ public class Solution {
 
     public static Path downloadFile(String urlString, Path downloadDirectory) throws IOException {
         // implement this method
+        String fileName = urlString.substring(urlString.lastIndexOf("/")+1);
+        Path downloadedFile = Paths.get(downloadDirectory + "\\" + fileName);
+
+        URL url = new URL(urlString);
+        InputStream inputStream = url.openStream();
+        //Path tempfile = Files.copy(downloadDirectory,".tmp");
+        //return tempfile;
+        return null;
     }
 }
