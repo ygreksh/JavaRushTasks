@@ -54,7 +54,7 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
         throw new  UnsupportedOperationException();
 
     }
-    class Entry<T> implements Serializable{
+    static class Entry<T> implements Serializable {
         String elementName;
         int lineNumber;
         boolean availableToAddLeftChildren, availableToAddRightChildren;
@@ -62,16 +62,21 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
 
         public Entry(String elementName) {
             this.elementName = elementName;
-            availableToAddLeftChildren = true;
-            availableToAddRightChildren = true;
+            this.availableToAddLeftChildren = true;
+            this.availableToAddRightChildren = true;
         }
-        public void checkChildren(){
-            if (leftChild != null) availableToAddLeftChildren = false;
-            if (rightChild != null) availableToAddRightChildren = false;
 
+        void checkChildren() {
+            if (leftChild != null) {
+                availableToAddLeftChildren = false;
+            }
+            if (rightChild != null) {
+                availableToAddRightChildren = false;
+            }
         }
-        public boolean isAvailableToAddChildren(){
-            return (availableToAddLeftChildren || availableToAddRightChildren);
+
+        boolean isAvailableToAddChildren() {
+            return availableToAddLeftChildren || availableToAddRightChildren;
         }
     }
 }
