@@ -6,7 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Cook extends Observable implements Observer{
-    String name;
+    private String name;
 
     public Cook(String name) {
         this.name = name;
@@ -18,9 +18,14 @@ public class Cook extends Observable implements Observer{
     }
 
     @Override
-    public void update(Observable observable, Object order) {
-        ConsoleHelper.writeMessage("Start cooking - " + order);
-        setChanged();
-        notifyObservers(order);
+    public void update(Observable observable, Object arg) {
+        Order order = (Order) arg;
+        if (!order.isEmpty()) {
+            ConsoleHelper.writeMessage("Start cooking - " + order + ", cooking time " + order.getTotalCookingTime() + "min");
+        }
+        if (!order.isEmpty()) {
+            setChanged();
+            notifyObservers(order);
+        }
     }
 }

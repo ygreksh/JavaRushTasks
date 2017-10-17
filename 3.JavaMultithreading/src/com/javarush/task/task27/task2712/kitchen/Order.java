@@ -12,12 +12,22 @@ public class Order {
 
     public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
-        dishes = ConsoleHelper.getAllDishesForOrder();
+        this.dishes = ConsoleHelper.getAllDishesForOrder();
 
     }
 
     @Override
     public String toString() {
         return dishes.isEmpty() ? "" : "Your order: " + dishes + " of " + tablet;
+    }
+    public int getTotalCookingTime(){
+        int cookingTime = 0;
+        for (Dish dish: dishes) {
+            cookingTime += dish.getDuration();
+        }
+        return cookingTime;
+    }
+    public boolean isEmpty(){
+        return dishes.isEmpty();
     }
 }
