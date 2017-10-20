@@ -1,6 +1,8 @@
 package com.javarush.task.task27.task2712.ad;
 
 import com.javarush.task.task27.task2712.ConsoleHelper;
+import com.javarush.task.task27.task2712.statistic.StatisticManager;
+import com.javarush.task.task27.task2712.statistic.event.VideoSelectedEventDataRow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +28,7 @@ public class AdvertisementManager {
         bestVariant = pickVideosToList(null, null, timeSeconds, 0, bestVariant);
         long totalAmount = 0;
         int totalDuration = 0;
+        StatisticManager.getInstance().register(new VideoSelectedEventDataRow(bestVariant, totalAmount, totalDuration));
         for (Advertisement ad : bestVariant) {
             ad.revalidate();
             ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d", ad.getName(),
@@ -33,7 +36,6 @@ public class AdvertisementManager {
             totalAmount += ad.getAmountPerOneDisplaying();
             totalDuration += ad.getDuration();
         }
-        //StatisticEventManager.getInstance().register(new VideoSelectedEventDataRow(bestVariant, totalAmount, totalDuration));
     }
     private List<Advertisement> pickVideosToList(List<Advertisement> previousList, Advertisement previousAd, int remainingTime,
                                                  long profit, List<Advertisement> bestResult) throws NoVideoAvailableException {

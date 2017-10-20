@@ -16,6 +16,10 @@ public class Order {
 
     }
 
+    public Tablet getTablet() {
+        return tablet;
+    }
+
     @Override
     public String toString() {
         return dishes.isEmpty() ? "" : "Your order: " + dishes + " of " + tablet;
@@ -29,5 +33,9 @@ public class Order {
     }
     public boolean isEmpty(){
         return dishes.isEmpty();
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
     }
 }
