@@ -22,10 +22,22 @@ public class Figure {
     public int[][] getMatrix() {
         return matrix;
     }
-    public void left(){}
-    public void right(){}
-    public void up(){}
-    public void down(){}
+    public void left(){
+        x--;
+        if (!isCurrentPositionAvailable())
+            x++;
+    }
+    public void right(){
+        x++;
+        if (!isCurrentPositionAvailable())
+            x--;
+    }
+    public void up(){
+        y--;
+    }
+    public void down(){
+        y++;
+    }
     public void rotate(){}
     public void downMaximum(){}
     public boolean isCurrentPositionAvailable(){
