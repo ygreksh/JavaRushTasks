@@ -18,7 +18,15 @@ public class Solution {
     }
 
     public static Object convertOneToAnother(Object one, Class resultClassObject) throws IOException {
-        return null;
+        StringWriter writer = new StringWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(writer, one);
+        String result = writer.toString();
+        String firstName = one.getClass().getSimpleName();
+        String secondName = resultClassObject.getSimpleName();
+        result = result.replaceFirst(firstName.toLowerCase(), secondName.toLowerCase());
+        StringReader reader = new StringReader(result);
+        return mapper.readValue(reader, resultClassObject);
     }
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property="className")
