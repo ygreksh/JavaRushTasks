@@ -22,4 +22,14 @@ public class Figure {
     public int[][] getMatrix() {
         return matrix;
     }
+    public void left(){}
+    public void right(){}
+    public void up(){}
+    public void down(){}
+    public void rotate(){}
+    public void downMaximum(){}
+    public boolean isCurrentPositionAvailable(){
+        return true;
+    }
+    public void landed(){}
 }
