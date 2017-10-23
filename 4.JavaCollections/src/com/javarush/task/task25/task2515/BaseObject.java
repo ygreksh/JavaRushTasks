@@ -40,4 +40,14 @@ public abstract class BaseObject {
         this.radius = radius;
         isAlive = true;
     }
+    public void draw(){}
+    public void move(){}
+    public void die(){
+        isAlive = false;
+    }
+    public boolean isIntersect(BaseObject o){
+        int distanse = (int) Math.round(Math.sqrt((this.x-o.x)*(this.x-o.x) + (this.y-o.y)*(this.y-o.y)));
+        if (distanse < Math.max(this.radius,o.radius)){return true;}
+        else return false;
+    }
 }
