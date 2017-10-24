@@ -5,6 +5,7 @@ package com.javarush.task.task33.task3309;
 */
 public class Solution {
     public static String toXmlWithComment(Object obj, String tagName, String comment) {
+
         return null;
     }
 
