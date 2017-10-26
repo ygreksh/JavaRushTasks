@@ -53,27 +53,21 @@ public class Model {
         addTile();
         addTile();
     }
-    private void compressTiles(Tile[] tiles){
-
+    private boolean compressTiles(Tile[] tiles){
+        boolean flag = false;
         for (int i=0;i<tiles.length-1;i++){
             if (tiles[i].value==0 && tiles[i+1].value!=0){
                 Tile temp = tiles[i];
                 tiles[i] = tiles[i+1];
                 tiles[i+1] = temp;
                 i=-1;
+                flag = true;
             }
         }
-        /*
-        for (int i = 0; i < tiles.length; i++) {
-            if (tiles[i].value == 0 && i < tiles.length - 1 && tiles[i + 1].value != 0) {
-                Tile temp = tiles[i];
-                tiles[i] = tiles[i + 1];
-                tiles[i + 1] = temp;
-                i = -1;
-            }
-        }*/
+        return flag;
     }
-    private void mergeTiles(Tile[] tiles){
+    private boolean mergeTiles(Tile[] tiles){
+        boolean flag = false;
         for (int i=0;i<tiles.length-1;i++){
             if (tiles[i].value!=0 && tiles[i].value==tiles[i+1].value){
                 Tile temp = new Tile(tiles[i].value * 2);
@@ -84,8 +78,21 @@ public class Model {
                 tiles[i] = temp;
                 tiles[i+1].value = 0;
                 compressTiles(tiles);
+                flag = true;
             }
         }
+        return flag;
+    }
+    public void left(){
+        boolean flag1 = false;
+        boolean flag2 = false;
+        boolean isChanged = false;
+        for (int i=0; i<FIELD_WIDTH;i++){
+            flag1 = compressTiles(gameTiles[i]);
+            flag2 = mergeTiles(gameTiles[i]);
+            if (flag1 | flag2) isChanged = true;
+        }
+        if (isChanged) addTile();
     }
 }
 
