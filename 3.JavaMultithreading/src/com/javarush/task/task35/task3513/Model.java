@@ -13,7 +13,12 @@ public class Model {
 
         resetGameTiles();
     }
-    public List<Tile> getEmptyTiles(){
+
+    public Tile[][] getGameTiles() {
+        return gameTiles;
+    }
+
+    private List<Tile> getEmptyTiles(){
         List<Tile> emptyTiles = new ArrayList<>();
         for (int i=0;i<FIELD_WIDTH;i++){
             for (int j=0;j<FIELD_WIDTH;j++){
@@ -127,6 +132,26 @@ public class Model {
         rotate();
         left();
         rotate();
+    }
+    public boolean canMove(){
+        if (!getEmptyTiles().isEmpty()) {
+            return true;
+        }
+        for (int i = 0; i < gameTiles.length; i++) {
+            for (int j = 0; j < gameTiles.length - 1; j++) {
+                if (gameTiles[i][j].value == gameTiles[i][j + 1].value) {
+                    return true;
+                }
+            }
+        }
+        for (int j = 0; j < gameTiles.length; j++) {
+            for (int i = 0; i < gameTiles.length - 1; i++) {
+                if (gameTiles[i][j].value == gameTiles[i + 1][j].value) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 
