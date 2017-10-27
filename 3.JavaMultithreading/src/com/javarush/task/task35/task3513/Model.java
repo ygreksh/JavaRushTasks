@@ -113,6 +113,7 @@ public class Model {
         return flag;
     }
     public void left(){
+        if (isSaveNeeded == true) saveState(gameTiles);
         boolean flag1 = false;
         boolean flag2 = false;
         boolean isChanged = false;
@@ -122,6 +123,7 @@ public class Model {
             if (flag1 | flag2) isChanged = true;
         }
         if (isChanged) addTile();
+        isSaveNeeded = true;
     }
     public void rotate() {
         for (int k = 0; k < FIELD_WIDTH/2; k++) {
@@ -135,6 +137,7 @@ public class Model {
         }
     }
     public void right() {
+        saveState(gameTiles);
         rotate();
         rotate();
         left();
@@ -143,6 +146,7 @@ public class Model {
     }
 
     public void up() {
+        saveState(gameTiles);
         rotate();
         left();
         rotate();
@@ -151,6 +155,7 @@ public class Model {
     }
 
     public void down() {
+        saveState(gameTiles);
         rotate();
         rotate();
         rotate();
