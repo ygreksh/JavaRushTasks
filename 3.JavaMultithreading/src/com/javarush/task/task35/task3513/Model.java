@@ -2,16 +2,40 @@ package com.javarush.task.task35.task3513;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Model {
     private static final int FIELD_WIDTH = 4;
     private Tile[][] gameTiles;
     public int score = 0;
     public int maxTile = 2;
+    Stack<Tile[][]> previousStates = new Stack<>();
+    Stack<Integer> previousScores = new Stack<>();
+    private boolean isSaveNeeded = true;
 
     public Model() {
 
         resetGameTiles();
+    }
+    private void saveState(Tile[][] tiles){
+        Tile[][] fieldToSave = new Tile[tiles.length][tiles[0].length];
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[0].length; j++) {
+                fieldToSave[i][j] = new Tile(tiles[i][j].value);
+            }
+        }
+        previousStates.push(fieldToSave);
+        int scoreToSave = score;
+        previousScores.push(scoreToSave);
+        isSaveNeeded = false;
+    }
+    public void rollback(){
+        if (!previousStates.isEmpty()) {
+            gameTiles = (Tile[][]) previousStates.pop();
+        }
+        if (!previousScores.isEmpty()) {
+            score = (int)previousScores.pop();
+        }
     }
 
     public Tile[][] getGameTiles() {
