@@ -54,19 +54,23 @@ public class AmigoSet<E> extends AbstractSet<E> implements Serializable, Cloneab
     }
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
-        out.writeObject(map.keySet());
+        out.writeInt(HashMapReflectionHelper.<Integer>callHiddenMethod(map, "capacity"));
+        out.writeFloat(HashMapReflectionHelper.<Float>callHiddenMethod(map, "loadFactor"));
         for(E e:map.keySet()){
             out.writeObject(e);
         }
-        out.writeFloat(HashMapReflectionHelper.callHiddenMethod(map, "loadFactor"));
-        out.writeInt(HashMapReflectionHelper.callHiddenMethod(map, "capacity"));
     }
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        Set keys = (Set)in.readObject();
-        float loadFactor = in.readFloat();
         int capacity = in.readInt();
-        map = new HashMap(capacity, loadFactor);
-
+        float loadFactor = in.readFloat();
+        map = new HashMap<>(capacity, loadFactor);
+        Set<E> set = new HashSet<>();
+        for(int i =0;i<capacity;i++){
+            set.add((E)in.readObject());
+        }
+        for(E e:set){
+            map.put(e,PRESENT);
+        }
     }
 }
