@@ -11,7 +11,7 @@ public class Solution {
     public static void main(String[] args){
         StorageStrategy strategy1 = new HashMapStorageStrategy();
         testStrategy(strategy1, 10000);
-
+        
     }
     public static Set<Long> getIds(Shortener shortener, Set<String> strings){
         Set<Long> ids = new HashSet<>();
