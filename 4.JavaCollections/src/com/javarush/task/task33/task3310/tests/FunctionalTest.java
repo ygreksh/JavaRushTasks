@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class FunctionalTest {
     public void testStorage(Shortener shortener){
+
         //Создавать три строки. Текст 1 и 3 строк должен быть одинаковым
         String s1 = Helper.generateRandomString();
         String s2 = Helper.generateRandomString();
@@ -19,47 +20,45 @@ public class FunctionalTest {
         Long id3 = shortener.getId(s3);
 
         //Проверять, что идентификатор для 2 строки не равен идентификатору для 1 и 3 строк
-        Assert.assertNotEquals(id1,id2);
-        Assert.assertEquals(id2,id3);
+        Assert.assertNotEquals(id2, id1);
+        Assert.assertNotEquals(id2, id3);
+
         //Проверять, что идентификаторы для 1 и 3 строк равны
         Assert.assertEquals(id1, id3);
 
-        //Получать три строки по трем идентификаторам с помощью shortener.
-        //Проверять, что строки, полученные в предыдущем пункте, эквивалентны оригинальным.
+        //Получать три строки по трем идентификаторам с помощью shortener
+        //Проверять, что строки, полученные в предыдущем пункте, эквивалентны оригинальным
         Assert.assertEquals(s1, shortener.getString(id1));
         Assert.assertEquals(s2, shortener.getString(id2));
         Assert.assertEquals(s3, shortener.getString(id3));
-
     }
+
     @Test
-    public void testHashMapStorageStrategy(){
-        StorageStrategy hashMapStorageStrategy = new HashMapStorageStrategy();
+    public void testHashMapStorageStrategy() {
+        HashMapStorageStrategy hashMapStorageStrategy = new HashMapStorageStrategy();
         Shortener shortener = new Shortener(hashMapStorageStrategy);
         testStorage(shortener);
     }
 
     @Test
-    public void testOurHashMapStorageStrategy(){
+    public void testOurHashMapStorageStrategy()
+    {
         StorageStrategy ourHashMapStorageStrategy = new OurHashMapStorageStrategy();
         Shortener shortener = new Shortener(ourHashMapStorageStrategy);
         testStorage(shortener);
     }
     @Test
-    public void testFileStorageStrategy(){
-        StorageStrategy fileStorageStrategy = new FileStorageStrategy();
+    public void testFileStorageStrategy()
+    {
+        FileStorageStrategy fileStorageStrategy = new FileStorageStrategy();
         Shortener shortener = new Shortener(fileStorageStrategy);
         testStorage(shortener);
     }
     @Test
-    public void testHashBiMapStorageStrategy(){
-        StorageStrategy hashBiMapStorageStrategy = new HashBiMapStorageStrategy();
+    public void testHashBiMapStorageStrategy()
+    {
+        HashBiMapStorageStrategy hashBiMapStorageStrategy = new HashBiMapStorageStrategy();
         Shortener shortener = new Shortener(hashBiMapStorageStrategy);
-        testStorage(shortener);
-    }
-    @Test
-    public void testOurHashBiMapStorageStrategy(){
-        StorageStrategy ourHashBiMapStorageStrategy = new OurHashBiMapStorageStrategy();
-        Shortener shortener = new Shortener(ourHashBiMapStorageStrategy);
         testStorage(shortener);
     }
     @Test
@@ -67,6 +66,13 @@ public class FunctionalTest {
     {
         DualHashBidiMapStorageStrategy dualHashBidiMapStorageStrategy = new DualHashBidiMapStorageStrategy();
         Shortener shortener = new Shortener(dualHashBidiMapStorageStrategy);
+        testStorage(shortener);
+    }
+    @Test
+    public void testOurHashBiMapStorageStrategy()
+    {
+        OurHashBiMapStorageStrategy ourHashBiMapStorageStrategy = new OurHashBiMapStorageStrategy();
+        Shortener shortener = new Shortener(ourHashBiMapStorageStrategy);
         testStorage(shortener);
     }
 }
