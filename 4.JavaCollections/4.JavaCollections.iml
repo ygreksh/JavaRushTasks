@@ -14,5 +14,7 @@
     <orderEntry type="library" name="commons-collections4-4.0" level="project" />
     <orderEntry type="library" name="junit-4.12" level="project" />
     <orderEntry type="library" name="guava-19.0" level="project" />
+    <orderEntry type="library" name="jsoup-1.11.1" level="project" />
+    <orderEntry type="library" name="jsoup-1.11.1-sources" level="project" />
   </component>
 </module>
