@@ -11,4 +11,5 @@ public class HHStrategy implements Strategy {
     public List<Vacancy> getVacancies(String searchString) {
         return null;
     }
+    //String.format(URL_FORMAT, "Kiev", 3);
 }
