@@ -7,9 +7,21 @@ import java.util.List;
 
 public class HtmlView implements View {
     private Controller controller;
+    private final String filePath = "./src/" + this.getClass().getPackage().getName().replace('.', '/') + "/vacancies.html";
     @Override
     public void update(List<Vacancy> vacancies) {
-        System.out.println(vacancies.size());
+        //System.out.println(vacancies.size());
+        try
+        {
+            updateFile(getUpdatedFileContent(vacancies));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private String getUpdatedFileContent(List<Vacancy> vacancies){
+        return null;
+    }
+    private void updateFile(String s){
     }
 
     @Override
