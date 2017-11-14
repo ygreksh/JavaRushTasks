@@ -1,10 +1,10 @@
 package com.javarush.task.task39.task3906;
 
 public class ElectricPowerSwitch {
-    private SecuritySystem securitySystem;
+    private Switchable securitySystem;
 
-    public ElectricPowerSwitch(SecuritySystem securitySystem) {
-        this.securitySystem = securitySystem;
+    public ElectricPowerSwitch(Switchable switchable) {
+        this.securitySystem = switchable;
     }
 
     public void press() {
