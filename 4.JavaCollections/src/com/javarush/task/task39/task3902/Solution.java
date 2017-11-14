@@ -20,6 +20,12 @@ public class Solution {
     }
 
     public static boolean isWeightEven(long number) {
+        int count = 0;
+        while (number != 0) {
+            count++;
+            number = number & (number - 1);
+        }
+        if (count % 2 == 0) return true;
         return false;
     }
 }
