@@ -1,10 +1,11 @@
 package com.javarush.task.task26.task2613;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CurrencyManipulator {
     private String currencyCode;
-    private Map<Integer, Integer> denominations;
+    private Map<Integer, Integer> denominations = new HashMap<>();
 
     public CurrencyManipulator(String currencyCode) {
         this.currencyCode = currencyCode;
@@ -15,6 +16,9 @@ public class CurrencyManipulator {
     }
 
     public void addAmount(int denomination, int count){
-            denominations.put(denomination, count);
+        if(denominations.containsKey(denomination))
+            denominations.put(denomination, denominations.get(denomination) + count);
+        else
+            denominations.put(denomination,count);
     }
 }
