@@ -63,5 +63,19 @@ public class ConsoleHelper {
         }
         return array;
     }
-
+    public static Operation askOperation(){
+        while (true)
+        {
+            String line = null;
+            try {
+                line = readString();
+            } catch (IOException e) {
+                continue;
+            }
+            if (Integer.parseInt(line) > 0 && Integer.parseInt(line) < 5)
+                return Operation.getAllowableOperationByOrdinal(Integer.parseInt(line));
+            else
+                writeMessage("Неправильно. Посторите ввод");
+        }
+    }
 }
