@@ -3,11 +3,10 @@ package com.javarush.task.task26.task2613;
 import com.javarush.task.task26.task2613.command.CommandExecutor;
 import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 
-import java.io.IOException;
 import java.util.Locale;
 
 public class CashMachine {
-    public static void main(String[] args) throws IOException, InterruptOperationException {
+    public static void main(String[] args){
         Locale.setDefault(Locale.ENGLISH);
         /*
         Operation operation = Operation.DEPOSIT;
@@ -19,10 +18,14 @@ public class CashMachine {
         manipulator.addAmount(nominal, count);
         ConsoleHelper.writeMessage("Всего денег этой валюты = " + String.valueOf(manipulator.getTotalAmount()));
         */
-        Operation operation;
-        do {
-            operation = ConsoleHelper.askOperation();
-            CommandExecutor.execute(operation);
-        } while (operation != Operation.EXIT);
+        try {
+            Operation operation;
+            do {
+                operation = ConsoleHelper.askOperation();
+                CommandExecutor.execute(operation);
+            } while (operation != Operation.EXIT);
+        } catch (InterruptOperationException e) {
+            ConsoleHelper.writeMessage("Bay");
+        }
     }
 }
