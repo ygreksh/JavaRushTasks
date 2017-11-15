@@ -13,6 +13,6 @@ public class CashMachine {
         int count = Integer.parseInt(dn[1]);
         CurrencyManipulator manipulator = CurrencyManipulatorFactory.getManipulatorByCurrencyCode(currCode);
         manipulator.addAmount(nominal, count);
-
+        ConsoleHelper.writeMessage("Всего денег этой валюты = " + String.valueOf(manipulator.getTotalAmount()));
     }
 }
