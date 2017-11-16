@@ -1,12 +1,19 @@
 package com.javarush.task.task26.task2613.command;
 
+import com.javarush.task.task26.task2613.CashMachine;
 import com.javarush.task.task26.task2613.ConsoleHelper;
 import com.javarush.task.task26.task2613.exception.InterruptOperationException;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 class LoginCommand implements Command {
     private final static String cardNumber = "123456789012";
     private final static String pincode = "1234";
     private boolean success = false;
+
+    //private ResourceBundle validCreditCards = ResourceBundle.getBundle("com.javarush.test.level26.lesson15.big01.resources.verifiedCards", Locale.ENGLISH);
+    private ResourceBundle validCreditCards = ResourceBundle.getBundle("com.javarush.task.task26.task2613.resources.verifiedCards");
 
     @Override
     public void execute() throws InterruptOperationException {
@@ -39,14 +46,12 @@ class LoginCommand implements Command {
             }
             else
             {
-                if (!inputCard.equals(cardNumber) || !inputPIN.equals(pincode))
-                {
-                    ConsoleHelper.writeMessage("Неверные данные. Попробуйте еще раз.");
-                }
-                else
-                {
-                    ConsoleHelper.writeMessage("Верификация пройдена успешно.");
-                    success = true;
+                if (validCreditCards.containsKey(inputCard) & inputPIN.equals(validCreditCards.getString(inputCard))) {
+                    ConsoleHelper.writeMessage("Верификация пройдена успешно!");
+                    break;
+                } else {
+                    ConsoleHelper.writeMessage("Карта не найдена в базе!");
+                    continue;
                 }
             }
         } while (!success);
