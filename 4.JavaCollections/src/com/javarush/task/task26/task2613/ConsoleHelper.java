@@ -1,5 +1,7 @@
 package com.javarush.task.task26.task2613;
 
+import com.javarush.task.task26.task2613.exception.InterruptOperationException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,15 +15,18 @@ public class ConsoleHelper {
     public static void writeMessage(String message){
         System.out.println(message);
     }
-    public static String readString() throws IOException {
+    public static String readString() throws InterruptOperationException{
         String line = "";
         try {
             line = bis.readLine();
+            if (line.equalsIgnoreCase("exit")) {
+                throw new InterruptOperationException();
+            }
         } catch (IOException ignored) {
         }
         return line;
     }
-    public static String askCurrencyCode() throws IOException {
+    public static String askCurrencyCode() throws InterruptOperationException {
         boolean flag = false;
         String currencyCode = "";
         while (!flag) {
@@ -36,7 +41,7 @@ public class ConsoleHelper {
         }
         return currencyCode.toUpperCase();
     }
-    public static String[] getValidTwoDigits(String currencyCode) throws IOException {
+    public static String[] getValidTwoDigits(String currencyCode) throws InterruptOperationException {
 
         writeMessage("Введите номинал и количество банкнот (два числа через пробел)");
 
@@ -63,15 +68,11 @@ public class ConsoleHelper {
         }
         return array;
     }
-    public static Operation askOperation(){
+    public static Operation askOperation() throws InterruptOperationException{
         while (true)
         {
             String line = null;
-            try {
-                line = readString();
-            } catch (IOException e) {
-                continue;
-            }
+            line = readString();
             if (Integer.parseInt(line) > 0 && Integer.parseInt(line) < 5)
                 return Operation.getAllowableOperationByOrdinal(Integer.parseInt(line));
             else
