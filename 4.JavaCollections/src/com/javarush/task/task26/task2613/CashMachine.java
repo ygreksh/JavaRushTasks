@@ -19,6 +19,11 @@ public class CashMachine {
         ConsoleHelper.writeMessage("Всего денег этой валюты = " + String.valueOf(manipulator.getTotalAmount()));
         */
         try {
+            CommandExecutor.execute(Operation.LOGIN);
+        } catch (InterruptOperationException e) {
+            ConsoleHelper.writeMessage("Bay");
+        }
+        try {
             Operation operation;
             do {
                 operation = ConsoleHelper.askOperation();
