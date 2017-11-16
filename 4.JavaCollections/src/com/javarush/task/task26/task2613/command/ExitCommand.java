@@ -3,7 +3,6 @@ package com.javarush.task.task26.task2613.command;
 import com.javarush.task.task26.task2613.ConsoleHelper;
 import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 
-import java.io.IOException;
 
 class ExitCommand implements Command {
     @Override
@@ -12,7 +11,7 @@ class ExitCommand implements Command {
 
         String s = null;
         s = ConsoleHelper.readString();
-        if (s.toUpperCase().equals("Y")) {
+        if (s.equalsIgnoreCase("Y")) {
                 ConsoleHelper.writeMessage("Bye");
             }
 

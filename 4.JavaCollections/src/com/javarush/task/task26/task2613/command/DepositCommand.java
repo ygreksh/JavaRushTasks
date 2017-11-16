@@ -5,7 +5,6 @@ import com.javarush.task.task26.task2613.CurrencyManipulator;
 import com.javarush.task.task26.task2613.CurrencyManipulatorFactory;
 import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 
-import java.io.IOException;
 
 class DepositCommand implements Command {
     @Override

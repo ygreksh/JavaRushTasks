@@ -16,15 +16,41 @@ public class ConsoleHelper {
         System.out.println(message);
     }
     public static String readString() throws InterruptOperationException{
+        /*
         String line = "";
         try {
             line = bis.readLine();
-            if (line.equalsIgnoreCase("exit")) {
-                throw new InterruptOperationException();
-            }
+
         } catch (IOException ignored) {
         }
+        if (line.equalsIgnoreCase("exit")) {
+            throw new InterruptOperationException();
+        }
         return line;
+        */
+        /*
+        String message = "";
+        try
+        {
+            message = bis.readLine();
+            if (message.equalsIgnoreCase("exit"))
+                throw new InterruptOperationException();
+        }
+        catch (IOException ignored)
+        {
+        }
+        return message;
+        */
+        String line;
+        while (true) {
+            try {
+                line = bis.readLine();
+            } catch (IOException e) {
+                continue;
+            }
+            if (line.equalsIgnoreCase("EXIT")) throw new InterruptOperationException();
+            else return line;
+        }
     }
     public static String askCurrencyCode() throws InterruptOperationException {
         boolean flag = false;

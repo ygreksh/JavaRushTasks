@@ -18,10 +18,15 @@ public class CashMachine {
         manipulator.addAmount(nominal, count);
         ConsoleHelper.writeMessage("Всего денег этой валюты = " + String.valueOf(manipulator.getTotalAmount()));
         */
+        /*
         try {
             CommandExecutor.execute(Operation.LOGIN);
         } catch (InterruptOperationException e) {
-            ConsoleHelper.writeMessage("Bay");
+            try {
+                CommandExecutor.execute(Operation.EXIT);
+            } catch (InterruptOperationException ignored) {
+            }
+            //ConsoleHelper.printExitMessage();
         }
         try {
             Operation operation;
@@ -31,6 +36,28 @@ public class CashMachine {
             } while (operation != Operation.EXIT);
         } catch (InterruptOperationException e) {
             ConsoleHelper.writeMessage("Bay");
+        }*/
+        try
+        {
+            CommandExecutor.execute(Operation.LOGIN);
+            Operation operation;
+
+            do
+            {
+                ConsoleHelper.writeMessage("Введите 1,2,3, или 4");
+                operation = ConsoleHelper.askOperation();
+
+                CommandExecutor.execute(operation);
+            }
+            while (operation != Operation.EXIT);
+        }
+        catch (InterruptOperationException e) {
+
+            try {
+                CommandExecutor.execute(Operation.EXIT);
+            } catch (InterruptOperationException ignored) {
+            }
+            ConsoleHelper.writeMessage("Выход");
         }
     }
 }

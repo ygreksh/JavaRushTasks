@@ -3,62 +3,52 @@ package com.javarush.task.task26.task2613.command;
 import com.javarush.task.task26.task2613.ConsoleHelper;
 import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 
-public class LoginCommand implements Command {
-    private String cardNumber = "123456789012";
-    private String cardPIN = "1234";
+class LoginCommand implements Command {
+    private final static String cardNumber = "123456789012";
+    private final static String pincode = "1234";
+    private boolean success = false;
+
     @Override
     public void execute() throws InterruptOperationException {
-        String inputCardNumber;
-        String inputCardPIN;
-
-        while (true){
-            ConsoleHelper.writeMessage("Введите номер карты");
-            inputCardNumber = ConsoleHelper.readString();
-            if (inputCardNumber.toLowerCase().equals("exit")){
-                throw  new InterruptOperationException();
-            }
-            if (inputCardNumber.length() != 12){
-                ConsoleHelper.writeMessage("Направильный номер карты");
-                continue;
-            }
-            ConsoleHelper.writeMessage("Введите PIN");
-            inputCardPIN = ConsoleHelper.readString();
-            if (inputCardPIN.toLowerCase().equals("exit")){
-                throw  new InterruptOperationException();
-            }
-            if (inputCardNumber.length() != 12){
-                ConsoleHelper.writeMessage("Направильный PIN");
-                continue;
-            }
-            /*
-            if (inputCardNumber.toLowerCase().equals("exit") || inputCardPIN.toLowerCase().equals("exit")){
-                throw  new InterruptOperationException();
-            }else
-            if (inputCardNumber.equals(cardNumber) &&
-                    inputCardPIN.equals(cardPIN)){
-                ConsoleHelper.writeMessage("Dерификация прошла успешно");
-                break;
-            }else {
-                ConsoleHelper.writeMessage("Направильный номер карты млм PIN");
-                continue;
-            }
-            */
-
-        }
-
         /*
         while (true) {
-            ConsoleHelper.writeMessage("Введите номер карты");
-            String readNumber = ConsoleHelper.readString();
-            String readPin = ConsoleHelper.readString();
-            if (readNumber.equals(cardNumber) && readPin.equals(cardPIN)) {
-                ConsoleHelper.writeMessage(String.format(res.getString("success.format"),readNumber));
-                break;
+            try {
+                ConsoleHelper.writeMessage("Введите номер карты (12 цифр) и пин-код карты (4 цифры):");
+                String numb = ConsoleHelper.readString();
+                String pin = ConsoleHelper.readString();
+                if (numb.length() != 12) throw new Exception();
+                if (pin.length() != 4) throw new Exception();
+                if (!numb.equals(cardNumber) && !pin.equals(pincode)) throw new Exception();
+                else {ConsoleHelper.writeMessage("Верификация прошла успешно.");
+                return;}
+            } catch (Exception e) {
+                ConsoleHelper.writeMessage("Данные невалидны. Повторите пожалуйста");
             }
-            ConsoleHelper.writeMessage(res.getString("not.verified.format"));
-            ConsoleHelper.writeMessage(res.getString("try.again.with.details"));
-            ConsoleHelper.writeMessage(res.getString("try.again.or.exit"));
         }
         */
+        do
+        {
+            ConsoleHelper.writeMessage("Введите номер карты:");
+            String inputCard = ConsoleHelper.readString();
+
+            ConsoleHelper.writeMessage("Введите ПИН:");
+            String inputPIN = ConsoleHelper.readString();
+            if (!inputCard.matches("^\\d{12}$") || !inputPIN.matches("^\\d{4}$"))
+            {
+                ConsoleHelper.writeMessage("Ошибка ввода. Попробуйте еще раз.");
+            }
+            else
+            {
+                if (!inputCard.equals(cardNumber) || !inputPIN.equals(pincode))
+                {
+                    ConsoleHelper.writeMessage("Неверные данные. Попробуйте еще раз.");
+                }
+                else
+                {
+                    ConsoleHelper.writeMessage("Верификация пройдена успешно.");
+                    success = true;
+                }
+            }
+        } while (!success);
     }
 }
