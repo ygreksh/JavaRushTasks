@@ -57,7 +57,6 @@ public class CashMachine {
                 CommandExecutor.execute(Operation.EXIT);
             } catch (InterruptOperationException ignored) {
             }
-            ConsoleHelper.writeMessage("Выход");
         }
     }
 }
