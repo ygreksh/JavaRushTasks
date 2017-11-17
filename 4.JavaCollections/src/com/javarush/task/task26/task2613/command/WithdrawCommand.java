@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 class WithdrawCommand implements Command {
-    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.withdraw_en");
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "withdraw_en");
     @Override
     public void execute() throws InterruptOperationException {
         ConsoleHelper.writeMessage(res.getString("before"));

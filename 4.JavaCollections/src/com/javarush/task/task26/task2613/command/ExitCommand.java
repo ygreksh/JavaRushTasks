@@ -8,8 +8,8 @@ import java.util.ResourceBundle;
 
 
 class ExitCommand implements Command {
-    //private ResourceBundle res = ResourceBundle.getBundle("com.javarush.task.task26.task2613.resources.exit_en");
-    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.exit_en");
+
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "exit_en");
     @Override
     public void execute() throws InterruptOperationException {
         ConsoleHelper.writeMessage(res.getString("exit.question.y.n"));
