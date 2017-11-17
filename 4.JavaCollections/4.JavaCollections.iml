@@ -18,5 +18,6 @@
     <orderEntry type="library" name="jsoup-1.11.1-sources" level="project" />
     <orderEntry type="library" name="httpclient-4.5.3" level="project" />
     <orderEntry type="library" name="httpcore-4.4.8" level="project" />
+    <orderEntry type="library" name="mail-1.4.7" level="project" />
   </component>
 </module>
