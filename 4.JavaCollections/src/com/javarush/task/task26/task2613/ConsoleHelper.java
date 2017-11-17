@@ -5,9 +5,11 @@ import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ResourceBundle;
 
 public class ConsoleHelper {
     private static final BufferedReader bis;
+    private static ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.common_en");
 
     static {
         bis = new BufferedReader(new InputStreamReader(System.in));
@@ -16,31 +18,7 @@ public class ConsoleHelper {
         System.out.println(message);
     }
     public static String readString() throws InterruptOperationException{
-        /*
-        String line = "";
-        try {
-            line = bis.readLine();
 
-        } catch (IOException ignored) {
-        }
-        if (line.equalsIgnoreCase("exit")) {
-            throw new InterruptOperationException();
-        }
-        return line;
-        */
-        /*
-        String message = "";
-        try
-        {
-            message = bis.readLine();
-            if (message.equalsIgnoreCase("exit"))
-                throw new InterruptOperationException();
-        }
-        catch (IOException ignored)
-        {
-        }
-        return message;
-        */
         String line;
         while (true) {
             try {
@@ -56,10 +34,10 @@ public class ConsoleHelper {
         boolean flag = false;
         String currencyCode = "";
         while (!flag) {
-            writeMessage("Введи код валюты (3 буквы):");
+            writeMessage(res.getString("choose.currency.code"));
             currencyCode = readString();
             if (currencyCode.length() != 3) {
-                writeMessage("Неправильный код!");
+                writeMessage(res.getString("invalid.data"));
             }
             else {
                 flag = true;
@@ -69,7 +47,7 @@ public class ConsoleHelper {
     }
     public static String[] getValidTwoDigits(String currencyCode) throws InterruptOperationException {
 
-        writeMessage("Введите номинал и количество банкнот (два числа через пробел)");
+        ConsoleHelper.writeMessage(String.format(res.getString("choose.denomination.and.count.format"), currencyCode));
 
         String[] array;
         while (true) {
@@ -87,7 +65,7 @@ public class ConsoleHelper {
                 */
             }
             if (nominal <= 0 || count <= 0) {
-                writeMessage("Неправильно, посторите ввод:");
+                writeMessage(res.getString("invalid.data"));
                 continue;
             }
             break;
@@ -95,14 +73,21 @@ public class ConsoleHelper {
         return array;
     }
     public static Operation askOperation() throws InterruptOperationException{
-        while (true)
-        {
-            String line = null;
-            line = readString();
-            if (Integer.parseInt(line) > 0 && Integer.parseInt(line) < 5)
-                return Operation.getAllowableOperationByOrdinal(Integer.parseInt(line));
-            else
-                writeMessage("Неправильно. Посторите ввод");
+        while (true) {
+            writeMessage(res.getString("choose.operation"));
+            String operation = readString();
+            if (operation.equalsIgnoreCase("help")) {
+                writeMessage( res.getString("operation.INFO") + ": 1;\n" +
+                        res.getString("operation.DEPOSIT") + ": 2;\n" +
+                        res.getString("operation.WITHDRAW") + ": 3;\n" +
+                        res.getString("operation.EXIT") + ": 4\n");
+                operation = readString();
+            }
+            try {
+                return Operation.getAllowableOperationByOrdinal(Integer.parseInt(operation));
+            } catch (IllegalArgumentException ex) {
+                writeMessage(res.getString("invalid.data"));
+            }
         }
     }
 }
