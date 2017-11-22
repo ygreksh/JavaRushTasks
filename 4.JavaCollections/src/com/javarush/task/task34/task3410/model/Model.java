@@ -27,5 +27,5 @@ public class Model {
         currentLevel++;
         restartLevel(currentLevel);
     }
-
+    
 }
