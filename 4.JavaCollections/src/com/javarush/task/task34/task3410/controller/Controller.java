@@ -14,9 +14,9 @@ public class Controller implements EventListener{
     public Controller() {
         view = new View(this);
         model = new Model();
+        view.init();
         model.setEventListener(this);
         view.setEventListener(this);
-        view.init();
         model.restart();
     }
 

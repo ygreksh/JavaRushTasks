@@ -20,6 +20,13 @@ public class Field extends JPanel {
         this.setFocusable(true);
     }
     public void paint(Graphics g){
+
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,500,500);
+        GameObjects gameObjects = view.getGameObjects();
+        for (GameObject gameObject : gameObjects.getAll()){
+            gameObject.draw(g);
+        }
         /*
         Box box = new Box(100,100);
         box.draw(g);
@@ -27,12 +34,6 @@ public class Field extends JPanel {
         Player player = new Player(200, 100);
         player.draw(g);
         */
-        g.setColor(Color.BLACK);
-        g.fillRect(0,0,500,500);
-        GameObjects gameObjects = view.getGameObjects();
-        for (GameObject gameObject : gameObjects.getAll()){
-            gameObject.draw(g);
-        }
     }
     public void setEventListener(EventListener eventListener){
         this.eventListener = eventListener;
